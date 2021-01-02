@@ -58,7 +58,7 @@ static int		ft_cpyword(char **split, char const *s, char c)
 			if ((split[i] = ft_substr(s, start, len)) == NULL)
 			{
 				while (i > 0)
-					free(split[i - 1]);
+					free(split[i-- - 1]);
 				return (-1);
 			}
 			i++;
