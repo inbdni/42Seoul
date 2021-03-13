@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:48 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/03/14 03:54:52 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/03/14 04:15:57 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,21 @@ int			after_read_all(char **data, char **line)
 
 int			get_next_line(int fd, char **line)
 {
-	static char	*data[MAX_OPEN];
+	static char	*data = NULL;
 	int			res;
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
 	while (1)
 	{
-		res = read_file(fd, &data[fd]);
+		res = read_file(fd, &data);
 		if (res <= 0)
 			break ;
-		res = find_newline(&data[fd], line);
+		res = find_newline(&data, line);
 		if (res != 0)
 			return (res);
 	}
 	if (res == -1)
 		return (-1);
-	return (after_read_all(&data[fd], line));
+	return (after_read_all(&data, line));
 }

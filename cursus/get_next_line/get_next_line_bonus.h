@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:46 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/03/14 03:59:40 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/03/14 04:15:14 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*ft_strjoin(const char *str, const char *buf);
 
 int			read_file(int fd, char **data);
 int			find_newline(char **data, char **line);
-void		get_newline(char **data, char **line, int idx);
+int			get_newline(char **data, char **line, int idx);
 int			after_read_all(char **data, char **line);
 int			get_next_line(int fd, char **line);
 
