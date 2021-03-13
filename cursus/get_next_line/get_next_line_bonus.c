@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/14 03:45:48 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/03/14 04:15:57 by jimbaek          ###   ########.fr       */
+/*   Created: 2021/03/14 04:26:01 by jimbaek           #+#    #+#             */
+/*   Updated: 2021/03/14 04:26:03 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 int			read_file(int fd, char **data)
 {
@@ -23,6 +23,8 @@ int			read_file(int fd, char **data)
 		return (res);
 	buffer[res] = 0;
 	tmp = ft_strjoin(*data, buffer);
+	if (tmp == NULL)
+		return (-1);
 	free(*data);
 	*data = tmp;
 	return (res);
@@ -35,13 +37,12 @@ int			find_newline(char **data, char **line)
 	idx = ft_strchr(*data, '\n');
 	if (idx >= 0)
 	{
-		get_newline(data, line, idx);
-		return (1);
+		return (get_newline(data, line, idx));
 	}
 	return (0);
 }
 
-void		get_newline(char **data, char **line, int idx)
+int			get_newline(char **data, char **line, int idx)
 {
 	char	*tmp;
 
@@ -50,9 +51,14 @@ void		get_newline(char **data, char **line, int idx)
 		*line = ft_strdup(*data);
 	else
 		*line = ft_strdup("");
+	if (*line == NULL)
+		return (-1);
 	tmp = ft_strdup(*data + idx + 1);
+	if (tmp == NULL)
+		return (-1);
 	free(*data);
 	*data = tmp;
+	return (1);
 }
 
 int			after_read_all(char **data, char **line)
@@ -62,8 +68,8 @@ int			after_read_all(char **data, char **line)
 	if (*data)
 	{
 		res = find_newline(data, line);
-		if (res)
-			return (1);
+		if (res != 0)
+			return (res);
 		*line = *data;
 		*data = NULL;
 		return (0);
@@ -71,27 +77,29 @@ int			after_read_all(char **data, char **line)
 	else
 	{
 		*line = ft_strdup("");
+		if (*line == NULL)
+			return (-1);
 		return (0);
 	}
 }
 
 int			get_next_line(int fd, char **line)
 {
-	static char	*data = NULL;
+	static char	*data[MAX_OPEN];
 	int			res;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= MAX_OPEN || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
 	while (1)
 	{
-		res = read_file(fd, &data);
+		res = read_file(fd, &data[fd]);
 		if (res <= 0)
 			break ;
-		res = find_newline(&data, line);
+		res = find_newline(&data[fd], line);
 		if (res != 0)
 			return (res);
 	}
 	if (res == -1)
 		return (-1);
-	return (after_read_all(&data, line));
+	return (after_read_all(&data[fd], line));
 }
