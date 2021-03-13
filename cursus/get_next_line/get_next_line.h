@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 17:14:06 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/03/14 03:34:36 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/03/14 03:59:51 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE	1024
+#  define BUFFER_SIZE 1024
 # endif
 
 int			ft_strlen(const char *s);

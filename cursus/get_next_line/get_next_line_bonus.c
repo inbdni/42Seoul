@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:48 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/03/14 03:47:32 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/03/14 03:54:52 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ int			get_next_line(int fd, char **line)
 	{
 		res = read_file(fd, &data[fd]);
 		if (res <= 0)
-			break;
+			break ;
 		res = find_newline(&data[fd], line);
 		if (res != 0)
 			return (res);
 	}
 	if (res == -1)
 		return (-1);
-	return after_read_all(&data[fd], line);
+	return (after_read_all(&data[fd], line));
 }
