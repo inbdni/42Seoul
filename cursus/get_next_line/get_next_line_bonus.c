@@ -6,11 +6,11 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 04:26:01 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/03/14 04:26:03 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/03/15 13:33:02 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int			read_file(int fd, char **data)
 {
