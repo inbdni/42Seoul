@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 17:21:40 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/06/19 23:49:26 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/06/21 18:04:46 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,11 @@ int		print_data(va_list ap, t_info *info)
 	return (res);
 }
 
-int		print_format(va_list ap, char *format)
+int		print_format(va_list ap, t_info *info, char *format)
 {
-	t_info	*info;
 	int		i;
 	int		res;
 
-	info = (t_info *)malloc(sizeof(t_info));
-	if (!info)
-		return (-1);
 	i = 0;
 	res = 0;
 	while (format[i])
@@ -54,6 +50,8 @@ int		print_format(va_list ap, char *format)
 			while (format[++i] && !check_info(ap, info, format[i]))
 				continue;
 			i++;
+			if (!info->valid)
+				break ;
 			res += print_data(ap, info);
 		}
 		else
@@ -66,10 +64,14 @@ int		print_format(va_list ap, char *format)
 int		ft_printf(const char *format, ...)
 {
 	va_list	ap;
+	t_info	*info;
 	int		res;
 
 	va_start(ap, format);
-	res = print_format(ap, (char *)format);
+	info = (t_info *)malloc(sizeof(t_info));
+	if (!info)
+		return (-1);
+	res = print_format(ap, info, (char *)format);
 	va_end(ap);
 	return (res);
 }

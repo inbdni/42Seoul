@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:25:34 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/06/19 23:50:18 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:46:55 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_info(t_info *info)
 {
+	info->valid = 0;
 	info->minus = 0;
 	info->zero = 0;
 	info->width = 0;
@@ -35,7 +36,7 @@ void	check_width_and_precision(va_list ap, t_info *info, char c)
 			}
 		}
 		else
-			info->precision = va_arg(ap, int);	
+			info->precision = va_arg(ap, int);
 	}
 	else
 	{
@@ -58,6 +59,7 @@ int		check_info(va_list ap, t_info *info, char c)
 		check_width_and_precision(ap, info, c);
 	else if (c == '%' || ft_isalpha(c))
 	{
+		info->valid = 1;
 		info->conversion = c;
 		if (info->minus)
 			info->zero = 0;
@@ -71,7 +73,7 @@ int		check_info(va_list ap, t_info *info, char c)
 void	check_info_nbr(t_info *info, unsigned long long data)
 {
 	int	conv;
-	
+
 	conv = info->conversion;
 	info->nbr_sign = 1;
 	if ((conv == 'd' || conv == 'i') && (int)data < 0)
@@ -79,4 +81,9 @@ void	check_info_nbr(t_info *info, unsigned long long data)
 	info->nbr_base = 10;
 	if (conv == 'p' || conv == 'x' || conv == 'X')
 		info->nbr_base = 16;
+	info->nbr_prefix = 0;
+	if ((conv == 'd' || conv == 'i') && (int)data < 0)
+		info->nbr_prefix = 1;
+	if (conv == 'p')
+		info->nbr_prefix = 2;
 }

@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:26:21 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/06/19 23:11:27 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:59:01 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		print_nbr(t_info *info, unsigned long long data)
 	res += put_empty(info->zero, info->width - (buflen));
 	if (!info->minus)
 		res += put_str(buf, buflen);
-	free(buf);
+	if (buflen)
+		free(buf);
 	return (res);
 }

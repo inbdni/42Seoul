@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 18:36:17 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/06/19 17:57:41 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:28:51 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,4 @@ int		ft_nbrlen(unsigned long long nbr, int base)
 		len++;
 	}
 	return (len);
-}
-
-int		ft_prelen(unsigned long long data, int conversion)
-{
-	if ((conversion == 'd' || conversion == 'i') && (int)data < 0)
-		return (1);
-	if (conversion == 'p')
-		return (2);
-	return (0);
 }
