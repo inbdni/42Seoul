@@ -6,7 +6,7 @@
 /*   By: jimbaek <jimbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 17:22:06 by jimbaek           #+#    #+#             */
-/*   Updated: 2021/06/21 18:02:55 by jimbaek          ###   ########.fr       */
+/*   Updated: 2021/06/21 21:06:36 by jimbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef	struct	s_info
 }				t_info;
 
 int				print_data(va_list ap, t_info *info);
-int				print_format(va_list ap, t_info	*info, char *format);
+int				print_format(va_list ap, char *format);
 int				ft_printf(const char *format, ...);
 
 int				print_chr(t_info *info, int data);
